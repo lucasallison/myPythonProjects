@@ -8,7 +8,7 @@ class deckOfCards():
 	def make_deck(self):
 		my_deck = []
 		for suit in ['Hearts', 'Diamonds', 'Clubs', 'Spades']:
-			for num in range (2, 10):
+			for num in range (2, 11):
 				my_deck.append(str(num) + ' of ' + suit)
 			for special in ['Jack', 'Queen', 'King', 'Ace']:
 				my_deck.append(special + ' of ' + suit)
@@ -23,38 +23,49 @@ class deckOfCards():
 
 class playBlackJack(): 
 	
+	#making a deck and a check deck	
+	deck_of_cards = deckOfCards()
+	check_deck = deck_of_cards.check_deck()
+	my_deck = deck_of_cards.make_deck()
 	account_balance =  100
+	
+	
+	dealer_cards = []
+	player_cards = []
 	
 	def start(self):
 		pass
 		
 	def place_bets(self):
-		
+	
 		while True:
+			bet = int(input('Place your bet: '))
+			if (playBlackJack.account_balance - bet > 0):
+				playBlackJack.account_balance -= bet
+				break
 		
-			bet = int(input('Place your bet: ')
-			#if playBlackJack.account_balance - bet <= 0 : 
-			if (1 < 3):
-		 		break
-		 	else: 
-		 		playBlackJack.account_blance -= bet
-		 		break	
-			
-			
-	def deal_cards(self):
-		pass
 	
 	def tap_or_pass(self):
 		pass
 	
-	def get_random_card(self, check_deck):
+	def get_random_card(self):
 		num = random.randint(0,53)
 		
-		while (check_deck[num]):
+		while (playBlackJack.check_deck[num]):
 			num = random.randint(0,53)
 	
-		return num
-
+		
+		playBlackJack.check_deck[num] = True
+		return playBlackJack.my_deck[num]
+		
+	def deal_cards(self):
+		playBlackJack.dealer_cards.append(self.get_random_card())
+		playBlackJack.player_cards.append(self.get_random_card())
+		playBlackJack.dealer_cards.append(self.get_random_card())
+		playBlackJack.player_cards.append(self.get_random_card())
+		
+		print ('your cards: ')
+		print (playBlackJack.player_cards[0], ' and ', playBlackJack.player_cards[1])
 	
 
 def play():	
@@ -63,18 +74,46 @@ def play():
 	play = playBlackJack()
 	
 	#while something
-
-	#making a deck and a check deck	
-	deck_of_cards = deckOfCards()
-	check_deck = deck_of_cards.check_deck()
-	my_deck = deck_of_cards.make_deck()
-
 	
 	play.place_bets()
+	play.deal_cards()
+	
+	
 	
 if __name__ == "__main__":	
 
 	play()
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	
 	
 	
