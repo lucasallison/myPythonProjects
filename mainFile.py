@@ -17,7 +17,7 @@ class deckOfCards():
 	
 	def check_deck(self):
 		check_deck = []
-		for num in range (0, 53):
+		for num in range (0, 52):
 			check_deck.append(False)
 		return check_deck
 
@@ -40,6 +40,7 @@ class playBlackJack():
 			else:
 				if (money - playBlackJack.bet >= 0):
 					money -= playBlackJack.bet
+					print('\n')
 					break
 				else: 
 					print('You do not have enough money') 
@@ -48,7 +49,10 @@ class playBlackJack():
 		score = 0
 		for card in the_cards:
 			try: 
-				score += int(card[0])
+				if(int(card[0] == 1)):
+					score += 10
+				else:
+					score += int(card[0])
 			except:
 				score += 10
 		return score
@@ -67,7 +71,7 @@ class playBlackJack():
 			else:
 				if choice != 0: 
 					playBlackJack.player_cards.append(self.get_random_card())
-					print('Your cards: ', playBlackJack.player_cards)
+					print('\nYour cards: ', playBlackJack.player_cards)
 			
 		
 		if (self.check_busted(playBlackJack.player_cards)): 
@@ -77,10 +81,10 @@ class playBlackJack():
 			return False
 					
 	def get_random_card(self):
-		num = random.randint(0,52)
+		num = random.randint(0,51)
 		
 		while (playBlackJack.check_deck[num]):
-			num = random.randint(0,52)
+			num = random.randint(0,51)
 	
 		playBlackJack.check_deck[num] = True
 		return playBlackJack.my_deck[num]
@@ -114,6 +118,7 @@ class playBlackJack():
 				print(f'The dealer won this round with {score_dealer} points. His cards: {playBlackJack.dealer_cards}. You had {score_player} points')
 				
 	def money_start(self):
+		global money
 		while True:
 			try:
 				money = int(input('Starting amount: '))
@@ -136,7 +141,7 @@ def play():
 	
 		play.place_bets()
 		play.deal_cards()
-		print('Your cards: \n', play.player_cards)
+		print('Your cards:\n', play.player_cards)
 		play.card_handout()
 		print(f'Your account balance {money}')
 		
@@ -149,7 +154,8 @@ def play():
 				except:
 					print('Try again')
 				else: 
-					break
+					del play
+				
 				
 			
 if __name__ == "__main__":	
